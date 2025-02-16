@@ -145,5 +145,6 @@ jobs:
       path: '.github/badges/points-bar.svg'
       label: "Golf score ${{ needs.run-autograding-tests.outputs.golf-score }}"
       branch: badges
+      width: 250
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
