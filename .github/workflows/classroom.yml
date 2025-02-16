@@ -138,9 +138,9 @@ jobs:
     permissions:
       contents: write
     with:
-      points: "${{ needs.run-autograding-tests.outputs.points }} ${{ needs.run-autograding-tests.outputs.golf-score }}"
+      points: ${{ needs.run-autograding-tests.outputs.points }}
       path: '.github/badges/points-bar.svg'
-      label: 'Points'
+      label: "Golf score ${{ needs.run-autograding-tests.outputs.golf-score }}"
       branch: badges
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
