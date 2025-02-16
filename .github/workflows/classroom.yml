@@ -71,13 +71,6 @@ jobs:
     - name: Build dependencies
       run: stack test --system-ghc --only-dependencies
 
-    - name: Compute golf score
-      id: golf
-      run: |
-        score=$(stack run golf --system-ghc)
-        echo "::notice title=Golf score updated::Golf score $score"
-        echo "score=$score" >> "$GITHUB_OUTPUT"
-
     - name: Cache ~/.stack
       id: stack-cache-save
       if: always() && steps.stack-cache-restore.outputs.cache-hit != 'true'
@@ -120,6 +113,13 @@ jobs:
         TASK-2_RESULTS: "${{steps.task-2.outputs.result}}"
       with:
         runners: task-1,task-2
+
+    - name: Compute golf score
+      id: golf
+      run: |
+        score=$(stack run golf --system-ghc)
+        echo "::notice title=Golf score updated::Golf score $score"
+        echo "score=$score" >> "$GITHUB_OUTPUT"
 
   ############################
   # Generate points bar badge
