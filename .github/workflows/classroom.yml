@@ -73,7 +73,10 @@ jobs:
 
     - name: Compute golf score
       id: golf
-      run: echo "score=$(stack run golf --system-ghc)" >> "$GITHUB_OUTPUT"
+      run: |
+        score=$(stack run golf --system-ghc)
+        echo "::notice::Golf score $score"
+        echo "score=$score" >> "$GITHUB_OUTPUT"
 
     - name: Cache ~/.stack
       id: stack-cache-save
