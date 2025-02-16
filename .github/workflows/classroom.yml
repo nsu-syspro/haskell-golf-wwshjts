@@ -75,7 +75,7 @@ jobs:
       id: golf
       run: |
         score=$(stack run golf --system-ghc)
-        echo "::notice::Golf score $score"
+        echo "::notice title=Golf score updated::Golf score $score"
         echo "score=$score" >> "$GITHUB_OUTPUT"
 
     - name: Cache ~/.stack
