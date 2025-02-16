@@ -24,6 +24,7 @@ jobs:
     outputs:
       # Setup outputs for update-points-bar job below
       points: ${{ steps.autograder.outputs.points }}
+      golf-score: ${{ steps.golf.outputs.score }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -69,6 +70,10 @@ jobs:
 
     - name: Build dependencies
       run: stack test --system-ghc --only-dependencies
+
+    - name: Compute golf score
+      id: golf
+      run: echo "score=$(stack run golf --system-ghc)" >> "$GITHUB_OUTPUT"
 
     - name: Cache ~/.stack
       id: stack-cache-save
@@ -133,7 +138,7 @@ jobs:
     permissions:
       contents: write
     with:
-      points: ${{ needs.run-autograding-tests.outputs.points }}
+      points: "${{ needs.run-autograding-tests.outputs.points }} ${{ needs.run-autograding-tests.outputs.golf-score }}"
       path: '.github/badges/points-bar.svg'
       label: 'Points'
       branch: badges

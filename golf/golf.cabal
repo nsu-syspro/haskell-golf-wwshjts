@@ -1,0 +1,13 @@
+cabal-version: 3.0
+name:          golf
+version:       0.1.0.0
+
+executable golf
+  main-is: Main.hs
+  hs-source-dirs: src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , haskell-src
+    , haskell-src-exts
+  default-language: Haskell2010
