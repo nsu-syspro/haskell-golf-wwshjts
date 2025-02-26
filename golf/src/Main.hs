@@ -2,10 +2,7 @@ import Language.Haskell.Exts
 import Data.Char (isSpace)
 
 main :: IO ()
-main = print =<< sum <$> mapM countFile
-  [ "src/Task1.hs"
-  , "src/Task2.hs"
-  ]
+main = print =<< countFile "src/Task1.hs"
 
 -- | Count number of characters in file ignoring:
 -- - whitespaces
