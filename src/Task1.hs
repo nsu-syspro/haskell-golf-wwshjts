@@ -1,25 +1,49 @@
-{-# OPTIONS_GHC -Wall #-}
--- The above pragma enables all warnings
-
 module Task1 where
 
--- Explicit import of Prelude to hide functions
--- that are not supposed to be used in this assignment
-import Prelude hiding (foldl, foldr, product)
-
------------------------------------
---
--- Computes factorial of given number
---
---   n! = 1 * 2 * ... * n
+-- | Compresses given data using run-length encoding.
 --
 -- Usage example:
 --
--- >>> factorial 5
--- 120
+-- >>> encode "aaabbccaadaaa"
+-- [(3,'a'),(2,'b'),(2,'c'),(2,'a'),(1,'d'),(3,'a')]
+-- >>> encode "abc"
+-- [(1,'a'),(1,'b'),(1,'c')]
+-- >>> encode []
+-- []
+--
+encode :: Eq a => [a] -> [(Int,a)]
+encode = error "TODO: define encode"
 
-factorial :: Integer -> Integer
--- Stub implementation for use in actual assignment
--- factorial = error "TODO: define factorial"
-factorial 0 = 1
-factorial n = n * factorial (n - 1)
+-- | Decompresses given data using run-length decoding.
+--
+-- Usage example:
+--
+-- >>> decode [(3,'a'),(2,'b'),(2,'c'),(2,'a'),(1,'d'),(3,'a')]
+-- "aaabbccaadaaa"
+-- >>> decode [(1,'a'),(1,'b'),(1,'c')]
+-- "abc"
+-- >>> decode []
+-- []
+--
+decode :: [(Int,a)] -> [a]
+decode = error "TODO: define decode"
+
+-- | Rotates given finite list to the left for a given amount N
+--
+-- If N is negative, then rotates to the right instead.
+--
+-- Usage example:
+--
+-- >>> rotate 3 "abcdefgh"
+-- "defghabc"
+-- >>> rotate (-2) "abcdefgh"
+-- "ghabcdef"
+-- >>> rotate 0 "abcdefgh"
+-- "abcdefgh"
+-- >>> rotate 5 "abc"
+-- "cab"
+-- >>> rotate 5 ""
+-- ""
+--
+rotate :: Int -> [a] -> [a]
+rotate = error "TODO: define rotate"
