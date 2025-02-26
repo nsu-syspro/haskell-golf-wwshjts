@@ -21,7 +21,7 @@ Each task has corresponding source file in [src](src) directory where you should
 
 ### Building
 
-All solutions should compile without warnings with following command:
+All solutions should compile ~~without warnings~~ with following command:
 
 ```bash
 stack build
