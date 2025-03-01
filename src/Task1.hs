@@ -11,7 +11,7 @@ module Task1 where
 -- >>> encode []
 -- []
 --
-encode :: Eq a => [a] -> [(Int,a)]
+encode :: Eq a => [a] -> [(Int, a)]
 encode = error "TODO: define encode"
 
 -- | Decompresses given data using run-length decoding.
@@ -25,7 +25,7 @@ encode = error "TODO: define encode"
 -- >>> decode []
 -- []
 --
-decode :: [(Int,a)] -> [a]
+decode :: [(Int, a)] -> [a]
 decode = error "TODO: define decode"
 
 -- | Rotates given finite list to the left for a given amount N

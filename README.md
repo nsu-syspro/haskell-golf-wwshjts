@@ -1,4 +1,4 @@
-# Haskell assignment base
+# Haskell: Golf
 
 <img alt="points bar" align="right" height="36" src="../../blob/badges/.github/badges/points-bar.svg" />
 
@@ -75,43 +75,95 @@ Ok, one module loaded.
 
 </details>
 
-## Task 1 (6 points)
+## Preface
 
-Implement factorial of n.
+This assignment is inspired by [code golf](https://code.golf) game where your goal is not only
+to correctly solve each task, but to do it in the least amount of symbols.
 
-$$
-n! = 1 \cdot 2 \cdot ... \cdot n
-$$
+Regardless of your "golf score" all solutions that pass automated tests and review will get the full credit.
 
-```haskell
-factorial :: Integer
+### Rules
+
+- Comments, imports, pragmas and type signatures do not count towards your golf score
+- Whitespaces do not count towards your golf score
+  (so please keep your solutions readable with all appropriate spacing)
+- Splitting your solution in separate files is **not allowed**
+- You can use any modules that GHC ships with by default
+  (not only [Prelude](https://hackage.haskell.org/package/base-4.21.0.0/docs/Prelude.html),
+  but also for example [Data.List](https://hackage.haskell.org/package/base-4.21.0.0/docs/Data-List.html))
+
+### Score
+
+To calculate "golf score" of your solution you can run the following command
+(first run will take some time to build necessary dependencies):
+
+```bash
+$ stack run
+93
 ```
-**Example:**
-```haskell
->>> factorial 0
-1
->>> factorial 5
-120
-```
 
-## Task 2 (4 points)
+It will calculate the score (which is the length of your solution) according to rules above.
 
-Implement "sumtorial" of n.
+The same score is automatically calculated when you push your solution to GitHub
+and will be displayed at the top of this README:
 
-$$
-f(n) =\begin{cases}
-1& \text{if } n = 0\\
-\sum_{i=1}^n{i}& \text{otherwise}
-\end{cases}
-$$
+![](images/golf-score-bar.png)
 
-```haskell
-sumtorial :: Integer
-```
-**Example:**
-```haskell
->>> sumtorial 0
-1
->>> sumtorial 5
-16
-```
+As well as in the "annotations" sections of automated test run in GitHub actions:
+
+![](images/golf-score-pr.png)
+
+## Task 1 (10 points)
+
+For this assignment your task is to implement the following functions
+
+- `encode` that compresses given list using
+  [run-length encoding](https://en.wikipedia.org/wiki/Run-length_encoding)
+  algorithm
+  ```haskell
+  encode :: Eq a => [a] -> [(Int, a)]
+  ```
+  **Example:**
+  ```haskell
+  >>> encode "aaabbccaadaaa"
+  [(3,'a'),(2,'b'),(2,'c'),(2,'a'),(1,'d'),(3,'a')]
+  >>> encode "abc"
+  [(1,'a'),(1,'b'),(1,'c')]
+  >>> encode []
+  []
+  ```
+
+- `decode` that decompresses given data encoded using
+  [run-length encoding](https://en.wikipedia.org/wiki/Run-length_encoding)
+  ```haskell
+  decode :: [(Int, a)] -> [a]
+  ```
+  **Example:**
+  ```haskell
+  >>> decode [(3,'a'),(2,'b'),(2,'c'),(2,'a'),(1,'d'),(3,'a')]
+  "aaabbccaadaaa"
+  >>> decode [(1,'a'),(1,'b'),(1,'c')]
+  "abc"
+  >>> decode []
+  []
+  ```
+  > **Note:** `Eq a` constraint is not necessary for decoding.
+
+- `rotate` that rotates given *finite* list to the left for a given amount `N`
+  ```haskell
+  rotate :: Int -> [a] -> [a]
+  ```
+  **Example:**
+  ```haskell
+  >>> rotate 3 "abcdefgh"
+  "defghabc"
+  >>> rotate (-2) "abcdefgh"
+  "ghabcdef"
+  >>> rotate 0 "abcdefgh"
+  "abcdefgh"
+  >>> rotate 5 "abc"
+  "cab"
+  >>> rotate 5 ""
+  ""
+  ```
+  > **Note:** if `N` is negative, then function rotates to the right instead.
