@@ -105,11 +105,8 @@ $ stack run
 It will calculate the score (which is the length of your solution) according to rules above.
 
 The same score is automatically calculated when you push your solution to GitHub
-and will be displayed at the top of this README:
-
-![](images/golf-score-bar.png)
-
-As well as in the "annotations" sections of automated test run in GitHub actions:
+and will be displayed at the top of this README,
+as well as in the "Annotations" section of automated test run in GitHub actions:
 
 ![](images/golf-score-pr.png)
 
