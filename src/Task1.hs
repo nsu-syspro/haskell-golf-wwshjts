@@ -12,7 +12,13 @@ module Task1 where
 -- []
 --
 encode :: Eq a => [a] -> [(Int, a)]
-encode = error "TODO: define encode"
+encode = foldr step []
+    where
+        step :: Eq a => a -> [(Int, a)] -> [(Int, a)]
+        step e [] = [(1, e)]
+        step e acc@((n, ee) : xs)
+            | e == ee   = (n + 1, ee) : xs 
+            | otherwise = (1, e)      : acc 
 
 -- | Decompresses given data using run-length decoding.
 --
