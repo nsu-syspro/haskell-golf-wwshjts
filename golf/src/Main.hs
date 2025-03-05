@@ -19,5 +19,21 @@ numNonSpaces :: String -> Int
 numNonSpaces = length . filter (not . isSpace)
 
 preserved :: Decl a -> Bool
-preserved (TypeSig {}) = False -- ignore type signatures
-preserved _ = True
+preserved decl = case decl of 
+  -- ignore type signatures
+  TypeSig {} -> False
+  -- ignore all pragma declarations
+  RulePragmaDecl {} -> False
+  DeprPragmaDecl {} -> False
+  WarnPragmaDecl {} -> False
+  InlineSig {} -> False
+  InlineConlikeSig {} -> False
+  SpecSig {} -> False
+  SpecInlineSig {} -> False
+  InstSig {} -> False
+  AnnPragma {} -> False
+  MinimalPragma {} -> False
+  RoleAnnotDecl {} -> False
+  CompletePragma {} -> False
+  -- preserve everything else
+  _ -> True
