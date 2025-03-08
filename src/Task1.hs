@@ -1,4 +1,9 @@
 module Task1 where
+import Data.List (group)
+
+-- Yeah this is ugly, but 2 points is 2 points
+l :: [a] -> Int
+l = length 
 
 -- | Compresses given data using run-length encoding.
 --
@@ -12,13 +17,7 @@ module Task1 where
 -- []
 --
 encode :: Eq a => [a] -> [(Int, a)]
-encode = foldr step []
-    where
-        step :: Eq a => a -> [(Int, a)] -> [(Int, a)]
-        step e [] = [(1, e)]
-        step e acc@((n, ee) : xs)
-            | e == ee   = (n + 1, ee) : xs 
-            | otherwise = (1, e)      : acc 
+encode x = [(l g, head g) | g <- group x]
 
 -- | Decompresses given data using run-length decoding.
 --
@@ -32,7 +31,7 @@ encode = foldr step []
 -- []
 --
 decode :: [(Int, a)] -> [a]
-decode = error "TODO: define decode"
+decode = concatMap (uncurry replicate)
 
 -- | Rotates given finite list to the left for a given amount N
 --
@@ -50,6 +49,6 @@ decode = error "TODO: define decode"
 -- "cab"
 -- >>> rotate 5 ""
 -- ""
---
-rotate :: Int -> [a] -> [a]
-rotate = error "TODO: define rotate"
+rotate :: Int -> [a] -> [a] 
+rotate _ [] = []
+rotate n x  = (drop <> take) (mod n $ l x) x
